@@ -29,9 +29,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MyForm.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="plugin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -41,9 +38,12 @@
     <ClInclude Include="Winlic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="IATFixer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MyForm.resx">
+    <EmbeddedResource Include="IATFixer.resx">
       <Filter>Resource Files</Filter>
     </EmbeddedResource>
   </ItemGroup>

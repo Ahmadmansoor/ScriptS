@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <psapi.h>
 #include "pluginsdk\_scriptapi_module.h"
-#include "MyForm.h"
+#include "IATFixer.h"
 
 
 void Winlic_int(PLUG_INITSTRUCT* initStruct)
@@ -20,7 +20,8 @@ static bool cbIATFixer_LoadForm(int argc, char* argv[])
 {
 	_plugin_logputs("[IATFixer] Loading Form!");
 	//char line[GUI_MAX_LINE_SIZE] = "";
-	
+	ScriptS::IATFixer IATFixer;
+	IATFixer.ShowDialog();
 	
 	return true;
 }

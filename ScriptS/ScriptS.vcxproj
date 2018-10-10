@@ -148,7 +148,7 @@
     <ClCompile Include="Winlic.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MyForm.h">
+    <ClInclude Include="IATFixer.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="plugin.h" />
@@ -156,8 +156,8 @@
     <ClInclude Include="Winlic.h" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MyForm.resx">
-      <DependentUpon>MyForm.h</DependentUpon>
+    <EmbeddedResource Include="IATFixer.resx">
+      <DependentUpon>IATFixer.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

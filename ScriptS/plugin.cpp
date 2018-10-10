@@ -1,5 +1,5 @@
 #include "plugin.h"
-#include "MyForm.h"
+#include "IATFixer.h"
 
 #define plugin_name "testplugin"
 #define plugin_version 1
@@ -15,8 +15,8 @@
 extern "C" __declspec(dllexport) void CBBREAKPOINT(CBTYPE cbType, PLUG_CB_BREAKPOINT* info)
 {
     dprintf("hit breakpoint on address %p\n", info->breakpoint->addr);
-	//ScriptS::MyForm myform;
-	//myform.ShowDialog();
+	//ScriptS::IATFixer IATFixer;
+	//IATFixer.ShowDialog();
 }
 
 //Initialize your plugin data here.
