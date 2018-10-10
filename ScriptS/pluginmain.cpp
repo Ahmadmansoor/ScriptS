@@ -1,5 +1,6 @@
 #include "pluginmain.h"
 #include "plugin.h"
+#include "Winlic.h"
 
 int pluginHandle;
 HWND hwndDlg;
@@ -14,7 +15,9 @@ PLUG_EXPORT bool pluginit(PLUG_INITSTRUCT* initStruct)
     initStruct->sdkVersion = PLUG_SDKVERSION;
     strncpy_s(initStruct->pluginName, PLUGIN_NAME, _TRUNCATE);
     pluginHandle = initStruct->pluginHandle;
-    return pluginInit(initStruct);
+	Winlic_int(initStruct);
+    //return pluginInit(initStruct);
+	return true;
 }
 
 PLUG_EXPORT bool plugstop()
