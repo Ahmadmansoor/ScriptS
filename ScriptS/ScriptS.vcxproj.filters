@@ -30,6 +30,9 @@
     <ClCompile Include="Winlic.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HelperFunctions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="plugin.h">
@@ -112,6 +115,9 @@
     </ClInclude>
     <ClInclude Include="pluginsdk\bridgemain.h">
       <Filter>Header Files\pluginsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="HelperFunctions.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
