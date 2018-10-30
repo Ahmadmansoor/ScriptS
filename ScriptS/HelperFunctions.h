@@ -7,8 +7,10 @@ using namespace Runtime::InteropServices;
 
 ///////////////////////////////////////////////////////////////////Helper Functions
 String^ reMoveSpaces(String^ input_);
-const char* str2Char(System::String^ string_);
+const char* Str2ConstChar(System::String^ string_);
 String^ CharArr2Str(char input_[]);
 duint Hex2duint(String^ input_);
 String^ duint2Hex(duint input_);
+String^ charPTR2String(char* input);
+String^ ClearSlash_etc(String^ input);
 

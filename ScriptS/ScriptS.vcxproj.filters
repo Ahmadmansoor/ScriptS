@@ -126,12 +126,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Library Include="pluginsdk\x32bridge.lib">
-      <Filter>Header Files\pluginsdk</Filter>
-    </Library>
-    <Library Include="pluginsdk\x32dbg.lib">
-      <Filter>Header Files\pluginsdk</Filter>
-    </Library>
     <Library Include="pluginsdk\x64bridge.lib">
       <Filter>Header Files\pluginsdk</Filter>
     </Library>

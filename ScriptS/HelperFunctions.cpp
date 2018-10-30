@@ -1,5 +1,5 @@
 #include "HelperFunctions.h"
-
+#include <msclr/marshal.h>
 
 	String^ reMoveSpaces(String^ input_) {
 		String^ temp;
@@ -13,7 +13,7 @@
 
 
 
-	const char* str2Char(System::String^ string_) {
+	const char* Str2ConstChar(System::String^ string_) {
 		IntPtr p = Marshal::StringToHGlobalAnsi(string_);
 		const char* linkStr = static_cast<char*>(p.ToPointer());
 		return linkStr;
@@ -25,6 +25,28 @@
 		return gcnew String(input_);
 	}
 
+
+	String^ ClearSlash_etc(String^ input) {
+		String^ temp;
+		for (int i = 0; i < input->Length - 1; ++i) {
+			//if (input->Substring(i, 1) != "\\" || input->Substring(i, 1) != ":") {
+			if (Char::IsDigit(input, i)  || Char::IsLetter(input,i) || input->Substring(i, 1) == ".") {
+				temp = temp + input->Substring(i, 1);
+			}
+		}
+		return temp;
+	}
+
+	String^ charPTR2String(char* input) {
+		
+			//String^ temp = gcnew String(input);
+			//const char* t = static_cast<const char*>(input);
+		std::string temp2(input);
+		std::wstring temp(temp2.begin(), temp2.end());
+		String^ temp1 = gcnew String(temp.c_str());		
+		return temp1;
+		
+	}
 
 	duint Hex2duint(String^ input_) {
 		try
