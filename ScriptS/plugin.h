@@ -10,3 +10,4 @@
 bool pluginInit(PLUG_INITSTRUCT* initStruct);
 void pluginStop();
 void pluginSetup();
+//PLUG_CB_CREATEPROCESS* process_Info;

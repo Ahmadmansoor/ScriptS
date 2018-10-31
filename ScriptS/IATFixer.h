@@ -3,8 +3,13 @@
 #include "Winlic.h"
 #include <msclr/marshal.h>
 #include "HelperFunctions.h"
+#include "memory_.h"
+//#include "plugin.h"
 //#include "pluginsdk\_scriptapi_register.h"
 //#include "pluginsdk\\_scriptapi_debug.h"
+
+extern std::vector<MemSectionInfo> MemSectionInfo_;
+
 namespace ScriptS {
 	using namespace System;
 	using namespace System::ComponentModel;
@@ -14,6 +19,8 @@ namespace ScriptS {
 	using namespace System::Drawing;
 	using namespace Microsoft::VisualBasic;
 	using namespace Runtime::InteropServices;
+
+	
 
 	//////////////////////////////////////////////////////////////////////
 
@@ -770,6 +777,9 @@ namespace ScriptS {
 
 	}
 	private: System::Void Bu_FixEmulatedAPIinIATtable0_Click(System::Object^  sender, System::EventArgs^  e) {
+			
+		//ListMemMapSection();
+
 		//Interaction::MsgBox("you should be at OEP of the target or near :)", MsgBoxStyle::DefaultButton1, "Info");
 		duint sectionBaseddr = 0x0000000000010000, sectionSize = DbgMemGetPageSize(sectionBaseddr);
 		duint finishSectionAddrSearchBase = DbgMemFindBaseAddr(Hex2duint(TB_OEP->Text), 0);

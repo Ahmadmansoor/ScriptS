@@ -158,6 +158,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HelperFunctions.cpp" />
+    <ClCompile Include="memory_.cpp" />
     <ClCompile Include="MyForm.cpp" />
     <ClCompile Include="plugin.cpp" />
     <ClCompile Include="pluginmain.cpp" />
@@ -168,6 +169,7 @@
     <ClInclude Include="IATFixer.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="memory_.h" />
     <ClInclude Include="plugin.h" />
     <ClInclude Include="pluginmain.h" />
     <ClInclude Include="pluginsdk\bridgegraph.h" />

@@ -12,11 +12,21 @@
 //int hMenuStack;
 
 
+PROCESS_INFORMATION* fdProcessInfo_x;
+
 extern "C" __declspec(dllexport) void CBBREAKPOINT(CBTYPE cbType, PLUG_CB_BREAKPOINT* info)
 {
-    dprintf("hit breakpoint on address %p\n", info->breakpoint->addr);
+    //dprintf("hit breakpoint on address %p\n", info->breakpoint->addr);	
 	//ScriptS::IATFixer IATFixer;
 	//IATFixer.ShowDialog();
+}
+
+extern "C" __declspec(dllexport) void CBCREATEPROCESS(CBTYPE cbType,PLUG_CB_CREATEPROCESS* info)
+{
+	//here I could't recive the PLUG_CB_CREATEPROCESS I don't know why but could recive part of the strcture
+	fdProcessInfo_x = new (PROCESS_INFORMATION);	
+	fdProcessInfo_x = info->fdProcessInfo;
+	
 }
 
 //Initialize your plugin data here.
@@ -34,6 +44,7 @@ bool pluginInit(PLUG_INITSTRUCT* initStruct)
 void pluginStop()
 {
 }
+
 
 //Do GUI/Menu related things here.
 void pluginSetup()
