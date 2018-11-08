@@ -12,6 +12,14 @@
 	}
 
 
+	String^ GetAPIName_LableWay(duint Addr_) {
+		SEGMENTREG segment;
+		char* text = new char[MAX_STRING_SIZE];
+		char* ModuleName = new char[MAX_STRING_SIZE]();		
+		DbgGetModuleAt(Addr_, ModuleName);
+		DbgGetLabelAt(Addr_, segment, text);
+		return(charPTR2String(ModuleName) + "."+ charPTR2String(text));
+	}
 
 	const char* Str2ConstChar(System::String^ string_) {
 		IntPtr p = Marshal::StringToHGlobalAnsi(string_);

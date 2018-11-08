@@ -13,4 +13,5 @@ duint Hex2duint(String^ input_);
 String^ duint2Hex(duint input_);
 String^ charPTR2String(char* input);
 String^ ClearSlash_etc(String^ input);
+String^ GetAPIName_LableWay(duint Addr_);
 
