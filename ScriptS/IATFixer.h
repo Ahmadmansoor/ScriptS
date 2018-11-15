@@ -129,8 +129,10 @@ namespace ScriptS {
 	private: System::Windows::Forms::ListBox^  LB_CmdBreak;
 	private: System::Windows::Forms::Label^  La_count;
 	private: System::Windows::Forms::Button^  button1;
-	private: System::Windows::Forms::ListBox^  Fix_API_Emulated_Call_LB;
+
 	private: System::Windows::Forms::ListBox^  Fixed_IAT_Table;
+	private: System::Windows::Forms::Label^  label8;
+
 
 
 
@@ -167,7 +169,6 @@ namespace ScriptS {
 			this->TB_IATTableAddress = (gcnew System::Windows::Forms::TextBox());
 			this->label6 = (gcnew System::Windows::Forms::Label());
 			this->TB_IATTableSize = (gcnew System::Windows::Forms::TextBox());
-			this->Fix_API_Emulated_Call_LB = (gcnew System::Windows::Forms::ListBox());
 			this->La_count = (gcnew System::Windows::Forms::Label());
 			this->LB_CmdBreak = (gcnew System::Windows::Forms::ListBox());
 			this->label7 = (gcnew System::Windows::Forms::Label());
@@ -180,6 +181,7 @@ namespace ScriptS {
 			this->tabControl1 = (gcnew System::Windows::Forms::TabControl());
 			this->tabPage1 = (gcnew System::Windows::Forms::TabPage());
 			this->tabPage2 = (gcnew System::Windows::Forms::TabPage());
+			this->label8 = (gcnew System::Windows::Forms::Label());
 			this->groupBox1->SuspendLayout();
 			this->groupBox2->SuspendLayout();
 			this->tabControl1->SuspendLayout();
@@ -201,10 +203,10 @@ namespace ScriptS {
 			// 
 			this->API_Emulated_Call_LB->FormattingEnabled = true;
 			this->API_Emulated_Call_LB->ItemHeight = 16;
-			this->API_Emulated_Call_LB->Location = System::Drawing::Point(13, 204);
+			this->API_Emulated_Call_LB->Location = System::Drawing::Point(8, 204);
 			this->API_Emulated_Call_LB->Margin = System::Windows::Forms::Padding(4);
 			this->API_Emulated_Call_LB->Name = L"API_Emulated_Call_LB";
-			this->API_Emulated_Call_LB->Size = System::Drawing::Size(198, 180);
+			this->API_Emulated_Call_LB->Size = System::Drawing::Size(472, 148);
 			this->API_Emulated_Call_LB->TabIndex = 5;
 			this->API_Emulated_Call_LB->MouseDoubleClick += gcnew System::Windows::Forms::MouseEventHandler(this, &IATFixer::API_Emulated_Call_LB_MouseDoubleClick);
 			// 
@@ -260,8 +262,8 @@ namespace ScriptS {
 			// 
 			// groupBox1
 			// 
+			this->groupBox1->Controls->Add(this->label8);
 			this->groupBox1->Controls->Add(this->groupBox2);
-			this->groupBox1->Controls->Add(this->Fix_API_Emulated_Call_LB);
 			this->groupBox1->Controls->Add(this->La_count);
 			this->groupBox1->Controls->Add(this->LB_CmdBreak);
 			this->groupBox1->Controls->Add(this->label7);
@@ -390,16 +392,6 @@ namespace ScriptS {
 			this->TB_IATTableSize->TabIndex = 13;
 			this->TB_IATTableSize->Text = L"5AE8";
 			this->TB_IATTableSize->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
-			// 
-			// Fix_API_Emulated_Call_LB
-			// 
-			this->Fix_API_Emulated_Call_LB->FormattingEnabled = true;
-			this->Fix_API_Emulated_Call_LB->ItemHeight = 16;
-			this->Fix_API_Emulated_Call_LB->Location = System::Drawing::Point(219, 204);
-			this->Fix_API_Emulated_Call_LB->Margin = System::Windows::Forms::Padding(4);
-			this->Fix_API_Emulated_Call_LB->Name = L"Fix_API_Emulated_Call_LB";
-			this->Fix_API_Emulated_Call_LB->Size = System::Drawing::Size(261, 180);
-			this->Fix_API_Emulated_Call_LB->TabIndex = 16;
 			// 
 			// La_count
 			// 
@@ -540,6 +532,16 @@ namespace ScriptS {
 			this->tabPage2->TabIndex = 1;
 			this->tabPage2->Text = L"Method 2";
 			// 
+			// label8
+			// 
+			this->label8->AutoSize = true;
+			this->label8->Location = System::Drawing::Point(9, 356);
+			this->label8->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label8->Name = L"label8";
+			this->label8->Size = System::Drawing::Size(56, 16);
+			this->label8->TabIndex = 16;
+			this->label8->Text = L"Count:";
+			// 
 			// IATFixer
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
@@ -578,7 +580,7 @@ namespace ScriptS {
 			return;
 		}
 		LB_CmdBreak->Items->Clear();
-		Fix_API_Emulated_Call_LB->Items->Clear();
+		//Fix_API_Emulated_Call_LB->Items->Clear();
 		API_Emulated_Call_LB->Items->Clear();
 		duint OEP = Hex2duint(TB_OEP->Text);
 		duint Textsctionbase = Hex2duint(TB_SectionBase->Text);
@@ -586,7 +588,7 @@ namespace ScriptS {
 		if (Textsctionbase == -1 || Textpagesize == -1)
 		{
 			Interaction::MsgBox("Something wrong with Text sctionbase or pagesize", MsgBoxStyle::DefaultButton1, "Error");
-			return;
+			//return;
 		}
 
 		GuiUpdateDisable(); // we need to use this because sometimes search will take more time and x64dbg could be hang 
@@ -635,6 +637,20 @@ namespace ScriptS {
 		La_count->Text = Microsoft::VisualBasic::Conversion::Str(lbCount);
 		//GuiUpdateEnable(true);
 		//return;
+		// find how many call we have 
+		int Call_Count = 0;
+		//duint Findaddr0 = Textsctionbase;
+		//while (Findaddr0 <= Textsctionbase + Textpagesize) {
+		//	duint delta0 = Findaddr0 - Textsctionbase;
+		//	Findaddr0 = Script::Pattern::FindMem(Findaddr0, Textpagesize - delta0, Str2ConstChar(PatternSearch)); //E8????????90
+		//	if (Findaddr0 == 0xffffffffffffffff || Findaddr0 == 0) break;
+		//	else
+		//	{
+		//		Call_Count += 1;
+		//		Findaddr0 = Findaddr0 + 0x2;
+		//	}
+		//}
+		//////
 		duint Findaddr = Textsctionbase;
 		while (Findaddr <= Textsctionbase + Textpagesize) {
 			duint delta = Findaddr - Textsctionbase;
@@ -661,19 +677,24 @@ namespace ScriptS {
 						Script::Register::Set(Script::Register::RIP, Findaddr);
 						//Script::Debug::SetBreakpoint(Findaddr + 0x5); we already put BP at all commands of "or rax, qword ptr ss:[rsp]"
 						Script::Debug::Run();
-						Script::Debug::Wait();
+						Script::Debug::Wait();						
 						Application::DoEvents();
 						DISASM_INSTR* instr1 = new DISASM_INSTR;
 						DbgDisasmAt(Script::Register::Get(Script::Register::RIP), instr1);
 						if (checkCmdAtBP(instr1)) {
+							Script::Debug::StepOver(); //or rax, qword ptr ss:[rsp] we need to make stepOut to get the value in RAX
+							Script::Debug::Wait();
 							duint API_Addr = Script::Register::Get(Script::Register::RAX);
 							duint Call_Addr = Findaddr;
 							// here we fix the call by search through the IAT Table iat_table_ and replace emulated Call
 							// with call qword ptr ds:[API_Addr]
-							duint iat_addr = FindAPIAddr(iat_table_, API_Addr);
+							duint iat_addr = FindAPIAddr_in_iatTable(iat_table_, API_Addr);
 							if (iat_addr == 0) {
-								Interaction::MsgBox("Something wrong with finding API in the Iat Table, API Address: " + duint2Hex(API_Addr) , MsgBoxStyle::DefaultButton1, "Error");
-								return;
+								GuiUpdateEnable(true);
+								Interaction::MsgBox("Something wrong with finding API in the Iat Table," + " Call Addr"+ duint2Hex(Call_Addr) +">> API Address: " + duint2Hex(API_Addr) , MsgBoxStyle::DefaultButton1, "Error");
+								//Script::Register::Set(Script::Register::RIP, Call_Addr);
+								API_Emulated_Call_LB->Items->Add(">>>>>" + duint2Hex(Findaddr));
+								//return;
 							}
 							else
 							{
@@ -683,12 +704,17 @@ namespace ScriptS {
 								//return;
 							}
 							API_Emulated_Call_LB->Items->Add("Call_Addr:  " + duint2Hex(Call_Addr) + " >> "  "API: " + duint2Hex(API_Addr));
+							API_Emulated_Call_LB->SelectedIndex = API_Emulated_Call_LB->Items->Count - 1;
+							//PBar_CallFixer->Value = Math::Round(Call_Count / 100);
+							Call_Count += 1;
+							label8->Text = Call_Count + " // " + 0x00010781;
 							IATFixer::Refresh();
 							Application::DoEvents();
 						}
 						else {
 							Interaction::MsgBox("Something Go wrong and we not reach the next BP", MsgBoxStyle::DefaultButton1, "Error");
-							return;
+							API_Emulated_Call_LB->Items->Add(">>>>>" + duint2Hex(Findaddr));
+							//return;
 						}
 
 						//API_Emulated_Call_LB->Items->Add(duint2Hex(Findaddr) + ": " + CharArr2Str(instr->instruction) + " ");
@@ -706,9 +732,10 @@ namespace ScriptS {
 		} ////////////////////////////////
 		Script::Register::Set(Script::Register::RIP, OEP);
 		GuiUpdateEnable(true);
+		Interaction::MsgBox("Done", MsgBoxStyle::DefaultButton1, "Done");
 	}
 
-	private: duint FindAPIAddr(System::Collections::Generic::List<IAT_table^>^  iat_table_, duint API_Addr) {
+	private: duint FindAPIAddr_in_iatTable(System::Collections::Generic::List<IAT_table^>^  iat_table_, duint API_Addr) {
 		for each (IAT_table^ x in iat_table_)
 		{
 			if (x->API_addr == API_Addr) {
@@ -734,9 +761,10 @@ namespace ScriptS {
 	}
 	private: System::Void API_Emulated_Call_LB_MouseDoubleClick(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) {
 		String^ Line_ = API_Emulated_Call_LB->GetItemText(API_Emulated_Call_LB->SelectedItem);
-		Line_ = Line_->Trim()->Substring(0, Line_->IndexOf(" "));
+		//Line_ = Line_->Trim()->Substring(0, Line_->IndexOf(" "));
 		//duint addr = Hex2duint(Line_);
-		DbgCmdExec(Str2ConstChar("disasm " + Line_));
+		//DbgCmdExec(Str2ConstChar("disasm " + Line_));
+		System::Windows::Clipboard::SetText(Line_);
 	}
 
 	private: System::Void CB_LimitBySction_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
